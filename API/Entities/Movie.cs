@@ -14,6 +14,7 @@ namespace API.Entities
         public string Storyline { get; set; }
         public byte[] Poster { get; set; }
         public byte GenreId { get; set; }
+        // navigation property
         public Genre Genre { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly StoreContext _context;
-        private new List<String> _allowedEx = new List<string> {".jpg", ".png"};
+        private new List<string> _allowedEx = new List<string> {".jpg", ".png"};
         private long _maxAllowedPosterSize = 1048576;
         public MoviesController(StoreContext context, IMapper mapper)
         {
@@ -26,7 +26,10 @@ namespace API.Controllers
         {
             var movies = await _context.Movies
             .OrderByDescending(x => x.Rate)
+            // b3rafo eh heya el navigation property el 3ayz a3mlha
+            // 3l4an myrg34 null
             .Include(m => m.Genre)
+            //MovieDetailsDto: da 3bara 3an class fe el property le ana 3ayz a3mlha return
             .Select(m => new MovieDetailsDto 
             {
                 Id = m.Id,
@@ -103,6 +106,7 @@ namespace API.Controllers
 
             var movie = _mapper.Map<Movie>(dto);
             movie.Poster = dataStream.ToArray();
+            // var movie = new Movie
             // {
             //     GenreId = dto.GenreId,
             //     Title = dto.Title,
